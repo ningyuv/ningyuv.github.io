@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ningyuv.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题目描述As a sponsor of programming contests, Yu has many factors to consider. Recently, he has found that the difficulties of problems can be a serious factor.For novices, they may simply ignore the prob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVA 8519 - Arrangement for Contests">
+<meta property="og:url" content="https://ningyuv.github.io/2019/10/06/Arrangement-for-Contests/index.html">
+<meta property="og:site_name" content="ningyuv&#39;s blog">
+<meta property="og:description" content="题目描述As a sponsor of programming contests, Yu has many factors to consider. Recently, he has found that the difficulties of problems can be a serious factor.For novices, they may simply ignore the prob">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-06T09:57:48.000Z">
+<meta property="article:modified_time" content="2020-07-13T13:49:52.165Z">
+<meta property="article:author" content="ningyuv">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="区间极值">
+<meta property="article:tag" content="区间修改">
+<meta property="article:tag" content="模板">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ningyuv.github.io/2019/10/06/Arrangement-for-Contests/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ningyuv.github.io/2019/10/06/Arrangement-for-Contests/","path":"2019/10/06/Arrangement-for-Contests/","title":"UVA 8519 - Arrangement for Contests"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVA 8519 - Arrangement for Contests | ningyuv's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ningyuv's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">输入描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">输出描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5"><span class="nav-number">1.3.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA"><span class="nav-number">1.4.</span> <span class="nav-text">样例输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ningyuv</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ningyuv" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ningyuv" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ningyuv@outlook.com" title="E-Mail → mailto:ningyuv@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://wangy.fun/" title="https:&#x2F;&#x2F;wangy.fun&#x2F;" rel="noopener" target="_blank">Wang Yi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yhl1999.github.io/" title="https:&#x2F;&#x2F;yhl1999.github.io&#x2F;" rel="noopener" target="_blank">yhl1999</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/chrysanthemum/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;chrysanthemum&#x2F;" rel="noopener" target="_blank">chrysanthemum</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ningyuv" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ningyuv.github.io/2019/10/06/Arrangement-for-Contests/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ningyuv">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ningyuv's blog">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVA 8519 - Arrangement for Contests | ningyuv's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVA 8519 - Arrangement for Contests
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-10-06 17:57:48" itemprop="dateCreated datePublished" datetime="2019-10-06T17:57:48+08:00">2019-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-07-13 21:49:52" itemprop="dateModified" datetime="2020-07-13T21:49:52+08:00">2020-07-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UVA/" itemprop="url" rel="index"><span itemprop="name">UVA</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>As a sponsor of programming contests, Yu has many factors to consider. Recently, he has found that the difficulties of problems can be a serious factor.<br>For novices, they may simply ignore the problems that are too hard; and for experts in programming contests, an easy problem almost means nothing. Moreover, if a contest consists of both easy and hard questions, it will not satisfy them — but make them unhappy for both reasons.<br>Therefore, Yu has come up with an idea: holding different kinds of contests! Novices tend to participant in a contest is known as an easy one, but will not join a hard one. <span id="more"></span><br>In details, suppose the difficulty of a problem can be measured as a positive integer, $i$. The bigger number means that the problem is harder. In Yu’s design, a contest consists of several problems with consistent difficulties. Formally, if a contest has k problem, then their difficulties must be $i, i + 1, . . . , i + k − 1$. This is because if there are two problems with same difficulties, their functions in the contest will be the same, which is not good; and if two problems have a big gap in difficulties, there will be questions that are mentioned above. Now, a contest with difficulty $1,2,3,4,5$ is obviously a simple one, and a contest with $5,6,7,8,9$ can be a hard one.<br>Yu has a large amount of problems, and he measures all the difficulties. Now, he wants to hold as many contests as possible. Do you know how many contests can he hold?</p>
+<h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h3><p>In the first line there is an integer $T (1 ≤ T ≤ 10)$, showing that there are T test cases. Each test case<br>consists of two lines.<br>For each test case, in the first line are two integers $N, K (1 ≤ K ≤ N ≤ 100, 000)$, where $N$ means<br>the kinds of difficulties, and $K$ is the number of questions that a contest may have.<br>In the second line, there are $N$ numbers $a[i] (0 ≤ a[i] ≤ 10^9)$, the $i_{th}$ indicates the number of<br>questions with difficulty $i$.</p>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h3><p>For each test case, the output should be an integer, indicating the maximum number of contests that<br>Yu can hold.</p>
+<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3 2</span><br><span class="line">1 2 1</span><br><span class="line">6 3</span><br><span class="line">1 5 3 4 7 6</span><br><span class="line">9 4</span><br><span class="line">2 7 1 3 6 5 8 9 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最初将$index$设为$1$，然后将$[index, index+k-1]$区间所有值减去改区间的最小值，将$index$设为该区间最小值的下标$+1$。</p>
+<p>由于涉及区间修改和区间查询，考虑采用线段树来维护。区间查询不只需要得到区间的最小值，也要得到该最小值对应的下标，所以需要对求极值的线段树进行改进。</p>
+<p>考虑到 <strong>pair</strong> 类型可以带着两个值返回，它的大小比较是先比较 <em>first</em>，所以将区间极值作为 <em>first</em>，下标作为 <em>second</em>，方便了线段树内部的比较。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">nod</span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> l,r,lazy;</span><br><span class="line">    pair&lt;<span class="type">long</span> <span class="type">long</span>,<span class="type">long</span> <span class="type">long</span>&gt; mins;</span><br><span class="line">&#125;t[<span class="number">400002</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> n,k,a[<span class="number">100002</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">buildtree</span><span class="params">(<span class="type">long</span> <span class="type">long</span> l,<span class="type">long</span> <span class="type">long</span> r,<span class="type">long</span> <span class="type">long</span> root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    t[root].l=l;t[root].r=r;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> x=(t[root].l+t[root].r)/<span class="number">2</span>,ch=root*<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(t[root].l==t[root].r)</span><br><span class="line">    &#123;</span><br><span class="line">        t[root].mins=<span class="built_in">make_pair</span>(a[l],l);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">buildtree</span>(l,x,ch);</span><br><span class="line">    <span class="built_in">buildtree</span>(x+<span class="number">1</span>,r,ch+<span class="number">1</span>);</span><br><span class="line">    t[root].mins=<span class="built_in">min</span>(t[ch].mins,t[ch+<span class="number">1</span>].mins);</span><br><span class="line">    t[root].lazy=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">changes</span><span class="params">(<span class="type">long</span> <span class="type">long</span> l,<span class="type">long</span> <span class="type">long</span> r,<span class="type">long</span> <span class="type">long</span> root,<span class="type">long</span> <span class="type">long</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> x=(t[root].l+t[root].r)/<span class="number">2</span>,ch=root*<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(t[root].l==l &amp;&amp; t[root].r==r)</span><br><span class="line">    &#123;</span><br><span class="line">        t[root].lazy+=num;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(r&lt;=x)<span class="built_in">changes</span>(l,r,ch,num);</span><br><span class="line">    <span class="keyword">if</span>(l&gt;x)<span class="built_in">changes</span>(l,r,ch+<span class="number">1</span>,num);</span><br><span class="line">    <span class="keyword">if</span>(l&lt;=x &amp;&amp; r&gt;x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">changes</span>(l,x,ch,num);</span><br><span class="line">        <span class="built_in">changes</span>(x+<span class="number">1</span>,r,ch+<span class="number">1</span>,num);</span><br><span class="line">    &#125;</span><br><span class="line">    t[root].mins.first+=num;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">pair&lt;<span class="type">long</span> <span class="type">long</span>,<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">finds</span><span class="params">(<span class="type">long</span> <span class="type">long</span> l,<span class="type">long</span> <span class="type">long</span> r,<span class="type">long</span> <span class="type">long</span> root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> x=(t[root].l+t[root].r)/<span class="number">2</span>,ch=root*<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(t[root].lazy)</span><br><span class="line">    &#123;</span><br><span class="line">        t[root].mins.first+=t[root].lazy;</span><br><span class="line">        <span class="keyword">if</span>(t[root].l!=t[root].r)</span><br><span class="line">        &#123;</span><br><span class="line">            t[ch].lazy+=t[root].lazy;</span><br><span class="line">            t[ch+<span class="number">1</span>].lazy+=t[root].lazy;</span><br><span class="line">        &#125;</span><br><span class="line">        t[root].lazy=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(t[root].l==l &amp;&amp; t[root].r==r)<span class="keyword">return</span> t[root].mins;</span><br><span class="line">    <span class="keyword">if</span>(r&lt;=x)<span class="keyword">return</span> <span class="built_in">finds</span>(l,r,ch);</span><br><span class="line">    <span class="keyword">if</span>(l&gt;x)<span class="keyword">return</span> <span class="built_in">finds</span>(l,r,ch+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(<span class="built_in">finds</span>(l,x,ch),<span class="built_in">finds</span>(x+<span class="number">1</span>,r,ch+<span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    pair&lt;<span class="type">long</span> <span class="type">long</span>,<span class="type">long</span> <span class="type">long</span>&gt; mins;</span><br><span class="line">    <span class="type">int</span> tt;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;tt);</span><br><span class="line">    <span class="keyword">while</span>(tt--)&#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">long</span> <span class="type">long</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">buildtree</span>(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> index=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(index&lt;=n-k+<span class="number">1</span>)&#123;</span><br><span class="line">            mins=<span class="built_in">finds</span>(index,index+k<span class="number">-1</span>,<span class="number">1</span>);</span><br><span class="line">            ans+=mins.first;</span><br><span class="line">            <span class="built_in">changes</span>(index,index+k<span class="number">-1</span>,<span class="number">1</span>,-mins.first);</span><br><span class="line">            index=mins.second+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward_qrcode_wechat.jpg" alt="ningyuv 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/reward_qrcode_alipay.jpg" alt="ningyuv 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+              <a href="/tags/%E5%8C%BA%E9%97%B4%E6%9E%81%E5%80%BC/" rel="tag"># 区间极值</a>
+              <a href="/tags/%E5%8C%BA%E9%97%B4%E4%BF%AE%E6%94%B9/" rel="tag"># 区间修改</a>
+              <a href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag"># 模板</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/10/05/2019-ICPC-Nanchang-Invitational-Sequence/" rel="prev" title="2019 ICPC 南昌邀请赛 F.Sequence">
+                  <i class="fa fa-chevron-left"></i> 2019 ICPC 南昌邀请赛 F.Sequence
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/10/07/Extend-to-Palindrome/" rel="next" title="UVA 11475 - Extend to Palindrome">
+                  UVA 11475 - Extend to Palindrome <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ningyuv</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">32k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">29 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ningyuv","repo":"ningyuv.github.io","client_id":"79dfbd3823fb33038ef0","client_secret":"d4433fb459da8b2175c3b85d2b839ef7848400b1","admin_user":"ningyuv","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"9c17074bb569b5342ffc1cacb94b6541"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"debug":false});</script></body>
+</html>

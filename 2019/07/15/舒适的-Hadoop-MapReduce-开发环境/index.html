@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ningyuv.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="环境一览 Apache Maven IntelliJ IDEA  安装 Apache Maven 确保已配置好 JAVA 环境，命令行输入 echo %JAVA_HOME% 检查是否有正确输出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="舒适的 Hadoop MapReduce 开发环境">
+<meta property="og:url" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="ningyuv&#39;s blog">
+<meta property="og:description" content="环境一览 Apache Maven IntelliJ IDEA  安装 Apache Maven 确保已配置好 JAVA 环境，命令行输入 echo %JAVA_HOME% 检查是否有正确输出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563199933794.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563166700184.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563170299535.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563171156552.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563172046823.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563173115447.png">
+<meta property="og:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563173220046.png">
+<meta property="article:published_time" content="2019-07-15T07:21:59.000Z">
+<meta property="article:modified_time" content="2020-07-13T13:44:00.480Z">
+<meta property="article:author" content="ningyuv">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="MapReduce">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="IntelliJ IDEA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563199933794.png">
+
+
+<link rel="canonical" href="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/","path":"2019/07/15/舒适的-Hadoop-MapReduce-开发环境/","title":"舒适的 Hadoop MapReduce 开发环境"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>舒适的 Hadoop MapReduce 开发环境 | ningyuv's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ningyuv's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%B8%80%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">环境一览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Apache-Maven"><span class="nav-number">2.</span> <span class="nav-text">安装 Apache Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-IntelliJ-IDEA"><span class="nav-number">3.</span> <span class="nav-text">安装 IntelliJ IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-mapreduce-%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">创建一个 mapreduce 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Maven-%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96"><span class="nav-number">5.</span> <span class="nav-text">配置 Maven 项目依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Artifacts-%E7%94%A8%E4%BA%8E-jar-%E6%89%93%E5%8C%85"><span class="nav-number">6.</span> <span class="nav-text">配置 Artifacts 用于 jar 打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E7%94%9F%E6%88%90%E7%9A%84-jar-%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">将生成的 jar 上传到服务器</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ningyuv</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ningyuv" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ningyuv" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ningyuv@outlook.com" title="E-Mail → mailto:ningyuv@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://wangy.fun/" title="https:&#x2F;&#x2F;wangy.fun&#x2F;" rel="noopener" target="_blank">Wang Yi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yhl1999.github.io/" title="https:&#x2F;&#x2F;yhl1999.github.io&#x2F;" rel="noopener" target="_blank">yhl1999</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/chrysanthemum/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;chrysanthemum&#x2F;" rel="noopener" target="_blank">chrysanthemum</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ningyuv" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ningyuv.github.io/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ningyuv">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ningyuv's blog">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="舒适的 Hadoop MapReduce 开发环境 | ningyuv's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          舒适的 Hadoop MapReduce 开发环境
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-15 15:21:59" itemprop="dateCreated datePublished" datetime="2019-07-15T15:21:59+08:00">2019-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-07-13 21:44:00" itemprop="dateModified" datetime="2020-07-13T21:44:00+08:00">2020-07-13</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="环境一览"><a href="#环境一览" class="headerlink" title="环境一览"></a>环境一览</h3><ul>
+<li>Apache Maven</li>
+<li>IntelliJ IDEA</li>
+</ul>
+<h3 id="安装-Apache-Maven"><a href="#安装-Apache-Maven" class="headerlink" title="安装 Apache Maven"></a>安装 Apache Maven</h3><ul>
+<li>确保已配置好 JAVA 环境，命令行输入 <code>echo %JAVA_HOME%</code> 检查是否有正确输出</li>
+</ul>
+<span id="more"></span>
+<ul>
+<li>到 <a target="_blank" rel="noopener" href="https://maven.apache.org/">Apache Maven 官网</a> 下载 <strong>Binary zip archive</strong> 并解压</li>
+<li>将解压出目录的 <strong>bin</strong> 目录添加到系统环境变量 <strong>PATH</strong> 中</li>
+<li>打开命令行输入 <code>mvn -v</code> 检查是否有 <em>Maven</em> 版本信息等输出</li>
+</ul>
+<h3 id="安装-IntelliJ-IDEA"><a href="#安装-IntelliJ-IDEA" class="headerlink" title="安装 IntelliJ IDEA"></a>安装 IntelliJ IDEA</h3><ul>
+<li>进入 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/">JetBrains 官网</a></li>
+<li>找到 IntelliJ IDEA 下载</li>
+<li><em>Ultimate</em> 版本包含高级功能，需付费</li>
+<li><em>Community</em> 版本满足日常使用<br><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563199933794.png" alt="官方下载页"></li>
+</ul>
+<h3 id="创建一个-mapreduce-项目"><a href="#创建一个-mapreduce-项目" class="headerlink" title="创建一个 mapreduce 项目"></a>创建一个 mapreduce 项目</h3><ul>
+<li>打开 IntelliJ IDEA 后创建新的项目，选择 <strong>maven</strong> 项目</li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563166700184.png" alt="新建 Maven 项目"></li>
+<li>命名 <strong>GroupId</strong> 和 <strong>ArtifactId</strong> ，然后完成项目创建，等待 IDEA 打开项目</li>
+</ul>
+<h3 id="配置-Maven-项目依赖"><a href="#配置-Maven-项目依赖" class="headerlink" title="配置 Maven 项目依赖"></a>配置 Maven 项目依赖</h3><ul>
+<li>打开项目根目录的 <strong>pom.xml</strong> 文件，向其中追加配置信息，完整配置文件参考</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hadoop-version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">hadoop-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mapreduce<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapreduce<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-hdfs<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-mapreduce-client-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其中 <em><strong>properties.hadoop-version</strong></em> 为当前所用 <strong>hadoop 版本</strong> 若有不同可根据需要修改</li>
+<li>示例所用 <strong>JDK 版本</strong> 为 <strong>1.8</strong> 若有不同需修改</li>
+<li>修改完成后，在 <strong>pom.xml</strong> 上<strong>右击</strong> -&gt; <strong>Maven</strong> -&gt; <strong>Reimport</strong></li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563170299535.png" alt="Maven Reimport"></li>
+<li>这个过程可能较长，速度与网络有关，请耐心等待</li>
+</ul>
+<h3 id="配置-Artifacts-用于-jar-打包"><a href="#配置-Artifacts-用于-jar-打包" class="headerlink" title="配置 Artifacts 用于 jar 打包"></a>配置 Artifacts 用于 jar 打包</h3><ul>
+<li>打开 <strong>Project Structure</strong> 选择 <strong>Artifacts</strong> 点击 <strong>+</strong> 号 -&gt; <strong>JAR</strong> -&gt; <strong>From modules with dependencies…</strong></li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563171156552.png" alt="配置 Artifacts"></li>
+<li>点击 <strong>OK</strong></li>
+<li>在 <em><strong>src&#x2F;main&#x2F;java</strong></em> 目录中编写代码</li>
+<li>代码编写完成后可以通过 <strong>Build</strong> -&gt; <strong>Build Artifacts…</strong> 将程序生成 <strong>jar</strong> 包</li>
+<li><strong>jar</strong> 包默认生成在 <em><strong>out&#x2F;artifacts&#x2F;*_jar&#x2F;</strong></em> 目录</li>
+<li>可以通过 <code>java -cp *.jar [&lt;PackageName&gt;.[&lt;SubPackageName&gt;.]...]&lt;MainClassName&gt;</code> 测试程序</li>
+</ul>
+<h3 id="将生成的-jar-上传到服务器"><a href="#将生成的-jar-上传到服务器" class="headerlink" title="将生成的 jar 上传到服务器"></a>将生成的 jar 上传到服务器</h3><ul>
+<li><p><em>Ultimate</em> 版本功能 <em>Deployment</em></p>
+<ul>
+<li>选择 <strong>Tools</strong> -&gt; <strong>Deployment</strong> -&gt; <strong>Configuration…</strong></li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563172046823.png" alt="配置 Deployment"></li>
+<li>点击 <strong>+</strong> 号 -&gt; <strong>SFTP</strong> </li>
+<li><blockquote>
+<p>请确保服务器&#x2F;虚拟机中 <strong>sshd</strong> 服务处于 <em><strong>active (running)</strong></em> 状态”</p>
+</blockquote>
+</li>
+<li>输入服务器&#x2F;虚拟机 <strong>IP</strong> 并填入其<strong>用户名</strong>和<strong>密码</strong>，可以点击 <strong>Test Connection</strong> 来测试连接</li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563173115447.png" alt="填入用户名和密码"></li>
+<li>可以在 <strong>Mappings</strong> 中配置路径，决定之后上传到服务器&#x2F;虚拟机的那个路径中</li>
+<li><img src="/2019/07/15/%E8%88%92%E9%80%82%E7%9A%84-Hadoop-MapReduce-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/1563173220046.png" alt="定义 Mappings"></li>
+<li>此时，我们可以在项目目录中<strong>右键</strong> -&gt; <strong>Deployment</strong>，将某个文件或者整个目录上传到服务器&#x2F;虚拟机中</li>
+<li>通常，我们只将 <strong>jar</strong> 包上传到生产环境即可</li>
+</ul>
+</li>
+<li><p>或者使用 <em>scp</em> 等方式将 jar 上传到服务器&#x2F;虚拟机</p>
+</li>
+<li><p>通过 <code>hadoop jar *.jar &lt;InputDir&gt; &lt;OutputDir&gt; &lt;OtherArgs&gt;</code> 来执行 <strong>MapReduce</strong> 作业</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward_qrcode_wechat.jpg" alt="ningyuv 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/reward_qrcode_alipay.jpg" alt="ningyuv 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+              <a href="/tags/MapReduce/" rel="tag"># MapReduce</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/15/MapReduce-Grep-%E7%A4%BA%E4%BE%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="MapReduce Grep 示例源码分析">
+                  MapReduce Grep 示例源码分析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ningyuv</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">32k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">29 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ningyuv","repo":"ningyuv.github.io","client_id":"79dfbd3823fb33038ef0","client_secret":"d4433fb459da8b2175c3b85d2b839ef7848400b1","admin_user":"ningyuv","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"dd7d02018857914057cef6245b65a8be"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"debug":false});</script></body>
+</html>
